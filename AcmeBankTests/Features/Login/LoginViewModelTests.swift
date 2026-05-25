@@ -72,10 +72,14 @@ final class LoginViewModelTests: XCTestCase {
 
     func test_signIn_setsIsLoadingTrue_thenResetsToFalse() {
         // Capture isLoading at the moment the closure fires.
+        // Two-step declaration so the closure can weakly capture `viewModel`
+        // — the capture list is evaluated as part of the initializer, so
+        // `viewModel` must already be in scope before the closure literal.
         var isLoadingDuringSignIn: Bool?
         let expectation = expectation(description: "onSignIn called")
 
-        let viewModel = LoginViewModel { [weak viewModel] _, _ in
+        var viewModel: LoginViewModel!
+        viewModel = LoginViewModel { [weak viewModel] _, _ in
             isLoadingDuringSignIn = viewModel?.isLoading
             expectation.fulfill()
         }
