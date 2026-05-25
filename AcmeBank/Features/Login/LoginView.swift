@@ -17,7 +17,7 @@ struct LoginView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 64, height: 64)
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                         .accessibilityIdentifier("login.logo")
 
                     Text("AcmeBank")
